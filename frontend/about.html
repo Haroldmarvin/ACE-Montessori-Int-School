@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story | ACE Montessori International</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --tekhelet: #49377D; 
+            --pomp-power: #8B6394;
+            --silver: #AFB1AC;
+            --gold: #D4AF37;
+        }
+        body { font-family: 'Poppins', sans-serif; color: #333; overflow-x: hidden; background-color: #fdfdfd; }
+        h1, h2, h3, .navbar-brand { font-family: 'Playfair Display', serif; }
+
+        /* Navigation */
+        .navbar { background: var(--tekhelet); padding: 15px 0; }
+
+        /* Parallax Hero Section */
+        .about-hero {
+            height: 60vh;
+            background: linear-gradient(rgba(73, 55, 125, 0.85), rgba(139, 99, 148, 0.7)), 
+                        url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        /* Crazy Back Button Effect */
+        .btn-crazy {
+            position: relative;
+            background: white;
+            color: var(--tekhelet) !important;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            overflow: hidden;
+            transition: 0.5s;
+            box-shadow: 0 0 20px rgba(255,255,255,0.4);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-crazy:hover {
+            transform: scale(1.1) rotate(-3deg);
+            background: var(--gold);
+            color: white !important;
+            box-shadow: 0 0 40px var(--gold);
+        }
+        .btn-crazy::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            transition: 0.5s;
+        }
+        .btn-crazy:hover::before { left: 100%; }
+
+        /* Info Cards with Glassmorphism */
+        .card-custom {
+            border: none;
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-custom:hover {
+            transform: translateY(-15px);
+            background: var(--tekhelet);
+            color: white;
+        }
+        .card-custom:hover .icon-box { background: white; color: var(--pomp-power); }
+
+        .icon-box {
+            width: 80px; height: 80px;
+            background: #f4f1ff;
+            color: var(--tekhelet);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            transition: 0.4s;
+        }
+        
+        /* Layout Compositions */
+        .img-decorated {
+            position: relative;
+            padding: 20px;
+        }
+        .img-decorated::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100px; height: 100px;
+            border-top: 5px solid var(--gold);
+            border-left: 5px solid var(--gold);
+        }
+        .img-decorated img {
+            border-radius: 20px;
+            box-shadow: 30px 30px 0px var(--silver);
+        }
+
+        .section-title {
+            color: var(--tekhelet);
+            font-weight: 700;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .floating-badge {
+            background: var(--gold);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="index.html">ACE MONTESSORI INT SCHOOl</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="academics.html">Academics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admissions.html">Admissions</a></li>
+                    <li class="nav-item"><a class="nav-link px-4 btn btn-light text-dark rounded-pill ms-lg-3" href="admin/dashboard.html">Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="about-hero">
+        <div class="container">
+            <div class="floating-badge">Established 2026 by Mr Harold Marvin Aidoo Sr</div>
+            <h1 class="display-1 fw-bold">Our Legacy & Story</h1>
+            <p class="lead fs-4 fw-light mb-5">Crafting an environment where children thrive independently.</p>
+            <a href="index.html" class="btn-crazy">
+                <i class="bi bi-house-door-fill me-2"></i> Return Home
+            </a>
+        </div>
+    </header>
+
+    <section class="py-5 mt-5">
+        <div class="container py-5">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <div class="img-decorated">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" class="img-fluid" alt="ACE Classroom">
+                    </div>
+                </div>
+                <div class="col-lg-6 order-1 order-lg-2">
+                    <h2 class="section-title">Nurturing Excellence In Liberia</h2>
+                    <p class="fs-5 text-muted mb-4">The Academic Center of Excellence (ACE) Montessori International School was founded on the belief that children are the masters of their own development.</p>
+                    <p class="mb-5">Our school provides more than just a curriculum; we provide a <strong>prepared environment</strong>. Every piece of furniture, every learning tool, and every educator is here to support the natural curiosity of your child.</p>
+                    
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="p-3 border-start border-4 border-warning bg-light">
+                                <h4 class="fw-bold mb-0">100%</h4>
+                                <small class="text-muted">Montessori Method</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-3 border-start border-4 border-primary bg-light">
+                                <h4 class="fw-bold mb-0">8:1</h4>
+                                <small class="text-muted">Student-Teacher Ratio</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card card-custom p-5">
+                        <div class="icon-box"><i class="bi bi-bullseye"></i></div>
+                        <h3 class="fw-bold">Our Mission</h3>
+                        <p>To provide a stimulating environment that empowers students to reach their full potential through self-directed learning and global perspectives.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom p-5">
+                        <div class="icon-box"><i class="bi bi-eye"></i></div>
+                        <h3 class="fw-bold">Our Vision</h3>
+                        <p>To be the leading international Montessori school in Africa, recognized for producing innovative, confident, and empathetic leaders.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-custom p-5">
+                        <div class="icon-box"><i class="bi bi-diamond"></i></div>
+                        <h3 class="fw-bold">Core Values</h3>
+                        <ul class="list-unstyled fw-bold mt-3">
+                            <li class="mb-2"><i class="bi bi-stars text-warning me-2"></i> Integrity</li>
+                            <li class="mb-2"><i class="bi bi-stars text-warning me-2"></i> Excellence</li>
+                            <li class="mb-2"><i class="bi bi-stars text-warning me-2"></i> Respect</li>
+                            <li><i class="bi bi-stars text-warning me-2"></i> Global Innovation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-5 text-center text-white" style="background-color: var(--tekhelet);">
+        <div class="container">
+            <h2 class="playfair mb-4">ACE Montessori International</h2>
+            <p class="opacity-75 mb-4">Established with love for the children of today and the leaders of tomorrow.</p>
+            <div class="social-icons fs-3 mb-4">
+                <i class="bi bi-instagram mx-3"></i>
+                <i class="bi bi-facebook mx-3"></i>
+                <i class="bi bi-linkedin mx-3"></i>
+            </div>
+            <p class="mb-0 small opacity-50">&copy; 2026 ACE Montessori International School. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

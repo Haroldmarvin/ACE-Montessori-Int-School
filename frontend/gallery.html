@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Gallery | ACE Montessori</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+    
+    <style>
+        :root { 
+            --tekhelet: #49377D; 
+            --pomp-power: #8B6394; 
+            --gold: #D4AF37;
+            --soft-bg: #f8f9fa;
+        }
+        
+        body { font-family: 'Poppins', sans-serif; background-color: var(--soft-bg); color: #333; }
+        h1, .navbar-brand { font-family: 'Playfair Display', serif; }
+        .navbar { background: var(--tekhelet); padding: 15px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+        .btn-back {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 22px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .btn-back:hover { background: white; color: var(--tekhelet); transform: translateY(-2px); }
+
+        /* Filter Buttons */
+        .filter-group { margin-bottom: 40px; display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+        .btn-filter {
+            border: 2px solid var(--tekhelet);
+            background: transparent;
+            color: var(--tekhelet);
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-filter.active, .btn-filter:hover {
+            background: var(--tekhelet);
+            color: white;
+            box-shadow: 0 6px 20px rgba(73, 55, 125, 0.25);
+        }
+
+        /* Gallery Item Card */
+        .gallery-card { margin-bottom: 24px; }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+            cursor: pointer;
+            height: 380px;
+            background: #eee;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.07);
+        }
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        
+        .gallery-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(73, 55, 125, 0.85) 0%, transparent 70%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 30px; opacity: 0; transition: 0.4s; transform: translateY(15px);
+        }
+        
+        .gallery-item:hover .gallery-overlay { opacity: 1; transform: translateY(0); }
+        .gallery-item:hover img { transform: scale(1.08); }
+
+        .category-badge {
+            background: var(--gold); color: white;
+            padding: 5px 14px; border-radius: 50px; font-size: 0.65rem;
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: inline-block;
+        }
+
+        #loader { min-height: 300px; display: flex; align-items: center; justify-content: center; width: 100%; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand fw-bold fs-3" href="index.html">ACE MONTESSORI INT SCHOOl</a>
+            <a href="index.html" class="btn-back">
+                <i class="bi bi-house-door-fill me-2"></i>Home
+            </a>
+        </div>
+    </nav>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h1 class="display-4 fw-bold mb-3" style="color: var(--tekhelet);">Captured Moments</h1>
+                <p class="lead text-muted mx-auto" style="max-width: 600px;">Explore the vibrant life at ACE Montessori where every day is a new adventure in learning.</p>
+            </div>
+
+            <div class="filter-group" id="filterButtons">
+                <button class="btn-filter active" data-filter="*">All Moments</button>
+                <button class="btn-filter" data-filter=".classroom">Classroom</button>
+                <button class="btn-filter" data-filter=".events">Events</button>
+                <button class="btn-filter" data-filter=".sports">Sports</button>
+                <button class="btn-filter" data-filter=".other">Campus Life</button>
+            </div>
+
+            <div class="row" id="galleryGrid">
+                <div id="loader">
+                    <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem; color: var(--tekhelet) !important;" role="status"></div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5 pt-4">
+                <a href="index.html" class="btn btn-outline-secondary px-5 py-3 rounded-pill fw-bold">
+                    <i class="bi bi-arrow-left me-2"></i> Back to Homepage
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+
+    <script>
+        const API_BASE_URL = "http://localhost:8080";
+
+        // Initialize Lightbox
+        Fancybox.bind("[data-fancybox]", {
+            compact: false,
+            idle: false,
+            animated: true,
+            showClass: "f-fadeIn"
+        });
+
+        async function loadGallery() {
+            const grid = document.getElementById('galleryGrid');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/gallery/all`); 
+                const images = await response.json();
+
+                if (!images || images.length === 0) {
+                    grid.innerHTML = '<div class="col-12 text-center py-5"><i class="bi bi-image text-muted fs-1"></i><p class="mt-3 text-muted">The gallery is getting ready. Check back soon!</p></div>';
+                    return;
+                }
+
+                // Map images to HTML
+                let html = images.map(img => {
+                    // Match the category to the filter buttons (lowercase)
+                    const categoryClass = img.category ? img.category.toLowerCase().replace(/\s+/g, '-') : 'other';
+                    const fullImageUrl = `${API_BASE_URL}/uploads${img.imageUrl}`;
+
+                    return `
+                        <div class="col-lg-4 col-md-6 gallery-card ${categoryClass}">
+                            <div class="gallery-item" data-fancybox="gallery" data-src="${fullImageUrl}" data-caption="${img.caption || 'ACE Montessori'}">
+                                <img src="${fullImageUrl}" alt="${img.caption || 'Gallery Image'}" loading="lazy">
+                                <div class="gallery-overlay">
+                                    <span class="category-badge">${img.category || 'School Life'}</span>
+                                    <h5 class="text-white fw-bold mb-0">${img.caption || 'Captured Moment'}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                grid.innerHTML = html;
+
+                // --- CRITICAL: Wait for images to load before positioning with Isotope ---
+                imagesLoaded(grid, function() {
+                    const iso = new Isotope(grid, {
+                        itemSelector: '.gallery-card',
+                        layoutMode: 'fitRows',
+                        percentPosition: true
+                    });
+
+                    // Filter Logic
+                    document.getElementById('filterButtons').addEventListener('click', (e) => {
+                        if (!e.target.classList.contains('btn-filter')) return;
+                        
+                        document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
+                        e.target.classList.add('active');
+                        
+                        const filterValue = e.target.getAttribute('data-filter');
+                        iso.arrange({ filter: filterValue });
+                    });
+                });
+
+            } catch (err) {
+                console.error("Gallery Fetch Error:", err);
+                grid.innerHTML = `<div class="col-12 text-center py-5"><div class="alert alert-danger d-inline-block">Unable to load gallery. Ensure the server is running on Port 8080.</div></div>`;
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', loadGallery);
+    </script>
+</body>
+</html>

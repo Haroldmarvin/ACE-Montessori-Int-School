@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACE Montessori International | Excellence in Education</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root { 
+            --tekhelet: #49377D; 
+            --pomp-power: #8B6394; 
+            --silver: #AFB1AC;
+            --glass: rgba(255, 255, 255, 0.15);
+        }
+
+        body { font-family: 'Poppins', sans-serif; color: #333; overflow-x: hidden; }
+        h1, h2, .navbar-brand { font-family: 'Playfair Display', serif; }
+
+        /* Navbar Enhancement */
+        .navbar { 
+            background: rgba(73, 55, 125, 0.95); 
+            backdrop-filter: blur(10px);
+            padding: 18px 0; 
+            transition: 0.4s;
+        }
+        .nav-link { font-weight: 400; font-family: 'Poppins'; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+
+        /* Advanced Hero Slideshow */
+        .hero-slider {
+            position: relative;
+            height: 90vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .carousel-item {
+            height: 90vh;
+            background-size: cover;
+            background-position: center;
+            transition: transform 2s ease, opacity 1s ease-in-out;
+        }
+
+        /* Hero Image Overlays - Using 3 different high-quality placeholder vibes */
+        .slide-1 { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=1920'); }
+        .slide-2 { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&q=80&w=1920'); }
+        .slide-3 { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1920'); }
+
+        .hero-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            z-index: 10;
+            text-align: center;
+            color: white;
+        }
+
+        .glass-box {
+            background: var(--glass);
+            backdrop-filter: blur(8px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: inline-block;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Feature Cards Upgrade */
+        .feature-box {
+            border: none;
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 1;
+        }
+        .feature-box::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, var(--tekhelet), var(--pomp-power));
+            border-radius: 20px;
+            opacity: 0;
+            z-index: -1;
+            transition: 0.4s;
+        }
+        .feature-box:hover { color: white; transform: translateY(-10px); }
+        .feature-box:hover::after { opacity: 1; }
+        .feature-box:hover .text-muted { color: rgba(255,255,255,0.8) !important; }
+
+        .btn-ace {
+            background: var(--pomp-power);
+            color: white;
+            border-radius: 50px;
+            padding: 15px 40px;
+            font-weight: 600;
+            border: none;
+            box-shadow: 0 10px 20px rgba(139, 99, 148, 0.3);
+            transition: 0.3s;
+        }
+        .btn-ace:hover { 
+            background: white; 
+            color: var(--tekhelet); 
+            transform: translateY(-3px); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        /* About Image Floating Effect */
+        .img-stack { position: relative; }
+        .img-main { width: 90%; border-radius: 20px; position: relative; z-index: 2; box-shadow: 20px 20px 60px rgba(0,0,0,0.1); }
+        .img-sub { 
+            width: 60%; border-radius: 20px; position: absolute; 
+            bottom: -10%; right: 0; z-index: 3; border: 8px solid white; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fs-3 fw-bold" href="index.html">ACE MONTESSORI INT SCHOOl</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="academics.html">Academics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admissions.html">Admissions</a></li>
+                    <li class="nav-item"><a class="nav-link px-4 btn btn-light text-dark rounded-pill ms-lg-3" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link px-4 btn btn-light text-dark rounded-pill ms-lg-3" href="admin/dashboard.html">Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-slider">
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-inner">
+                <div class="carousel-item active slide-1"></div>
+                <div class="carousel-item slide-2"></div>
+                <div class="carousel-item slide-3"></div>
+            </div>
+        </div>
+
+        <div class="hero-overlay">
+            <div class="glass-box">
+                <h6 class="text-uppercase fw-bold mb-3" style="letter-spacing: 3px; color: var(--silver);">Liberia's Premier International School</h6>
+                <h1 class="display-1 fw-bold mb-4">Nurturing Brilliant Minds</h1>
+                <p class="lead mb-5 fs-4 fw-light">A world-class Montessori foundation for the future leaders of Libera and beyond.</p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="admissions.html" class="btn btn-ace btn-lg">Apply for 2026</a>
+                    <a href="about.html" class="btn btn-outline-light btn-lg rounded-pill px-5">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 mt-5">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="img-stack">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" class="img-main" alt="Learning">
+                        <img src="images/image.png" class="img-sub" alt="Child">
+                    </div>
+                </div>
+                <div class="col-lg-6 ps-lg-5">
+                    <h6 class="text-uppercase fw-bold" style="color: var(--pomp-power);">Welcome to ACE</h6>
+                    <h2 class="display-4 fw-bold mb-4" style="color: var(--tekhelet);">Where Every Child is an Architect of Their Future</h2>
+                    <p class="text-muted fs-5 mb-4">At ACE Montessori International, we believe education is not the filling of a pail, but the lighting of a fire. Our prepared environment allows children to discover their potential through self-directed activity and collaborative play.</p>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-2"><i class="bi bi-check-circle-fill me-2 text-success"></i> Authentic Montessori Method</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill me-2 text-success"></i> International Teaching Standards</li>
+                        <li class="mb-2"><i class="bi bi-check-circle-fill me-2 text-success"></i> State-of-the-Art Facilities</li>
+                    </ul>
+                    <a href="about.html" class="btn btn-link text-decoration-none fw-bold p-0" style="color: var(--tekhelet);">Discover Our Philosophy <i class="bi bi-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold" style="color: var(--tekhelet);">The ACE Pillars</h2>
+                <div style="width: 80px; height: 4px; background: var(--pomp-power); margin: 20px auto;"></div>
+            </div>
+            
+            <div class="row g-4 text-center">
+                <div class="col-md-4">
+                    <div class="card h-100 feature-box shadow-sm">
+                        <div class="fs-1 mb-3" style="color: var(--tekhelet);"><i class="bi bi-globe-europe-africa"></i></div>
+                        <h4 class="fw-bold">Global Mindset</h4>
+                        <p class="text-muted">Developing cultural awareness and bilingual skills from the earliest years.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 feature-box shadow-sm">
+                        <div class="fs-1 mb-3" style="color: var(--tekhelet);"><i class="bi bi-heart-pulse"></i></div>
+                        <h4 class="fw-bold">Holistic Growth</h4>
+                        <p class="text-muted">Focusing on emotional, social, and physical wellbeing alongside academics.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 feature-box shadow-sm">
+                        <div class="fs-1 mb-3" style="color: var(--tekhelet);"><i class="bi bi-lightbulb"></i></div>
+                        <h4 class="fw-bold">Creative Genius</h4>
+                        <p class="text-muted">Encouraging curiosity and innovation through hands-on exploration.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <footer class="py-5 text-white" style="background-color: #49377D; border-top: 4px solid #8B6394;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h3 class="fw-bold mb-4 text-white">Academic Center of Excellence</h3>
+                <p class="small" style="line-height: 2; color: #AFB1AC;">
+                    A legacy of excellence Est. 2026. We provide a nurturing environment that fosters independence and a lifelong love of learning for children.
+                </p>
+            </div>
+
+            <div class="col-md-4 mb-4 text-md-center">
+                <h5 class="fw-bold mb-4 text-white">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="about.html" class="text-decoration-none hover-white" style="color: #AFB1AC;">Our Story</a></li>
+                    <li class="mb-2"><a href="academics.html" class="text-decoration-none hover-white" style="color: #AFB1AC;">Curriculum</a></li>
+                    <li class="mb-2"><a href="gallery.html" class="text-decoration-none hover-white" style="color: #AFB1AC;">School Life</a></li>
+                    <li class="mb-2"><a href="admissions.html" class="text-decoration-none hover-white" style="color: #AFB1AC;">Apply Now</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-4 mb-4 text-md-end">
+                <h5 class="fw-bold mb-4 text-white">Visit Us</h5>
+                <p class="small" style="color: #AFB1AC;">
+                    Brewerville Road, Monrovia, Liberia<br>
+                    info@acemontessori.com<br>
+                    +231 886 523 021
+                </p>
+                <div class="fs-4 mt-3">
+                    <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-white"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <hr class="mt-4 border-light opacity-50">
+        
+        <div class="row align-items-center">
+            <div class="col-md-12 text-center">
+                <p class="small mb-0" style="color: #AFB1AC;">
+                    &copy; 2026 ACE Montessori International School. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+    /* Added hover effect for better UI */
+    .hover-white:hover {
+        color: #ffffff !important;
+        transition: 0.3s;
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Navbar scroll effect using official Tekhelet color
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.style.padding = '10px 0';
+            navbar.style.background = '#49377D'; // Solid Tekhelet
+        } else {
+            navbar.style.padding = '18px 0';
+            navbar.style.background = 'rgba(73, 55, 125, 0.9)'; // Transparent Tekhelet
+        }
+    });
+</script>
+</body>
+</html>

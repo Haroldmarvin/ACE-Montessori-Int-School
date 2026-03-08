@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academics | ACE Montessori International</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --tekhelet: #49377D; 
+            --pomp-power: #8B6394;
+            --silver: #AFB1AC;
+            --gold: #D4AF37;
+            --soft-bg: #fdfbff;
+        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--soft-bg); color: #333; overflow-x: hidden; }
+        h1, h2, h3, .navbar-brand { font-family: 'Playfair Display', serif; }
+
+        /* Navbar */
+        .navbar { background: var(--tekhelet); padding: 15px 0; }
+
+        /* Academic Hero - Sleek Gradient & Motion */
+        .academics-hero {
+            height: 50vh;
+            background: linear-gradient(135deg, rgba(73, 55, 125, 0.95), rgba(139, 99, 148, 0.8)), 
+                        url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Crazy Home Button - Matching the About Page */
+        .btn-home-pulse {
+            position: relative;
+            background: var(--gold);
+            color: white !important;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.4s;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .btn-home-pulse:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 30px var(--gold);
+            background: white;
+            color: var(--tekhelet) !important;
+        }
+
+        /* Level Cards - Sophisticated Glass & Depth */
+        .level-card {
+            border: none;
+            border-radius: 25px;
+            background: white;
+            overflow: hidden;
+            height: 100%;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .level-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(73, 55, 125, 0.15);
+        }
+        .level-card .level-header {
+            background: var(--tekhelet);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+        }
+        .level-header h4 { letter-spacing: 2px; font-weight: 700; margin: 0; }
+        
+        /* Modern Curriculum Grid */
+        .curriculum-box {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            border-left: 6px solid var(--gold);
+            height: 100%;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+        .curriculum-box:hover {
+            background: var(--pomp-power);
+            color: white;
+            border-left-color: white;
+        }
+        .curriculum-box:hover p { color: rgba(255,255,255,0.8) !important; }
+        .curriculum-box i { font-size: 2.5rem; color: var(--pomp-power); margin-bottom: 15px; display: block; }
+        .curriculum-box:hover i { color: white; }
+
+        /* Icon Circle Background */
+        .icon-wrap {
+            width: 60px; height: 60px;
+            background: #f4f1ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="index.html">ACE MONTESSORI INT SCHOOl</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="academics.html">Academics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admissions.html">Admissions</a></li>
+                   <li class="nav-item"><a class="nav-link px-4 btn btn-light text-dark rounded-pill ms-lg-3" href="admin/dashboard.html">Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="academics-hero">
+        <div class="container">
+            <h1 class="display-1 fw-bold mb-3">Academic Excellence</h1>
+            <p class="lead fs-4 fw-light">Empowering independence through the mastery of skills.</p>
+            <a href="index.html" class="btn-home-pulse"><i class="bi bi-arrow-left"></i> BACK TO CAMPUS</a>
+        </div>
+    </header>
+
+    <section class="py-5">
+        <div class="container py-5">
+            <div class="row justify-content-center text-center mb-5">
+                <div class="col-lg-8">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--tekhelet);">Our Prepared Environments</h2>
+                    <p class="text-muted fs-5">We offer four distinct levels of learning, each tailored to the specific developmental "sensitive periods" of your child's growth.</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card level-card">
+                        <div class="level-header" style="background: #6c5ce7;">
+                            <h4>CRECHE</h4>
+                        </div>
+                        <div class="card-body p-4">
+                            <span class="badge bg-light text-dark mb-3">6m - 2yrs</span>
+                            <p class="small text-muted">Focusing on sensory-motor development and providing a secure emotional foundation.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card level-card">
+                        <div class="level-header" style="background: #a29bfe;">
+                            <h4>NURSERY</h4>
+                        </div>
+                        <div class="card-body p-4">
+                            <span class="badge bg-light text-dark mb-3">2yrs - 4yrs</span>
+                            <p class="small text-muted">Building practical life coordination, Grace & Courtesy, and language enrichment.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card level-card">
+                        <div class="level-header" style="background: #8b6394;">
+                            <h4>KINDY</h4>
+                        </div>
+                        <div class="card-body p-4">
+                            <span class="badge bg-light text-dark mb-3">4yrs - 6yrs</span>
+                            <p class="small text-muted">Transitioning to mathematical minds and advanced phonics-based reading.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card level-card">
+                        <div class="level-header" style="background: #49377d;">
+                            <h4>PRIMARY</h4>
+                        </div>
+                        <div class="card-body p-4">
+                            <span class="badge bg-light text-dark mb-3">6yrs - 11yrs</span>
+                            <p class="small text-muted">Abstract thinking, research projects, and complex cosmic education studies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5" style="background: #f1eff6;">
+        <div class="container py-5">
+            <h2 class="text-center mb-5 fw-bold" style="color: var(--tekhelet);">The Five Pillars of ACE</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="curriculum-box">
+                        <div class="icon-wrap"><i class="bi bi-hand-index-thumb"></i></div>
+                        <h5>Practical Life</h5>
+                        <p class="text-muted small">Activities that teach the child to care for themselves and their environment, building focus and order.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="curriculum-box">
+                        <div class="icon-wrap"><i class="bi bi-puzzle"></i></div>
+                        <h5>Sensorial</h5>
+                        <p class="text-muted small">Developing and refining the five senses to help children classify the world around them.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="curriculum-box">
+                        <div class="icon-wrap"><i class="bi bi-calculator"></i></div>
+                        <h5>Mathematics</h5>
+                        <p class="text-muted small">Using concrete Montessori materials to understand quantities and the decimal system.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="curriculum-box">
+                        <div class="icon-wrap"><i class="bi bi-translate"></i></div>
+                        <h5>Language & Literacy</h5>
+                        <p class="text-muted small">A phonetics-rich environment where children learn to write before they read through sand-paper letters.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="curriculum-box">
+                        <div class="icon-wrap"><i class="bi bi-compass"></i></div>
+                        <h5>Culture & Science</h5>
+                        <p class="text-muted small">Integrating Geography, History, Botany, and Zoology to show the interconnectedness of all life.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 text-center bg-white">
+        <div class="container">
+            <h3 class="fw-bold mb-4">Ready for a World-Class Education?</h3>
+            <a href="admissions.html" class="btn btn-lg px-5 py-3 rounded-pill text-white" style="background: var(--tekhelet);">Start Enrollment</a>
+        </div>
+    </section>
+
+    <footer class="py-5 text-center text-white" style="background-color: #1a1a1a;">
+        <div class="container">
+            <p class="opacity-75 mb-0 small">&copy; 2026 ACE Montessori International School. Nurturing Future Global Citizens.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

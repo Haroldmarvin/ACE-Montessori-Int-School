@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACE Admin Pro | Management Suite</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { 
+            --tekhelet: #49377D; 
+            --pomp-power: #8B6394; 
+            --gold: #D4AF37;
+            --sidebar-width: 280px;
+        }
+
+        body { 
+            background: #f4f7fe; 
+            font-family: 'Poppins', sans-serif; 
+            color: #2d3748; 
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Styling */
+        .sidebar { 
+            height: 100vh; 
+            background: var(--tekhelet); 
+            color: white; 
+            position: fixed; 
+            width: var(--sidebar-width); 
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-header {
+            padding: 30px 25px;
+            background: rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .nav-link { 
+            color: rgba(255,255,255,0.6); 
+            padding: 14px 25px; 
+            margin: 4px 15px;
+            transition: 0.2s; 
+            display: flex; 
+            align-items: center; 
+            border-radius: 12px;
+            font-weight: 400;
+        }
+
+        .nav-link:hover { color: white; background: rgba(255,255,255,0.05); }
+        .nav-link.active { color: white; background: var(--pomp-power); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .nav-link i { margin-right: 15px; font-size: 1.25rem; }
+
+        /* Main Content */
+        .main-content { 
+            margin-left: var(--sidebar-width); 
+            padding: 40px; 
+            min-height: 100vh;
+        }
+
+        .section-container { display: none; animation: slideUp 0.4s ease-out; }
+        .section-container.active { display: block; }
+
+        /* Cards & Components */
+        .glass-card { 
+            background: white; 
+            border: none; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+            padding: 25px;
+        }
+
+        .stat-icon {
+            width: 60px; height: 60px;
+            border-radius: 15px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .table thead th {
+            background: #f8fafc;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: #64748b;
+            border: none;
+            padding: 15px;
+        }
+
+        .badge-grade {
+            background: var(--pomp-power);
+            color: white; padding: 5px 12px; border-radius: 8px; font-size: 0.8rem;
+        }
+
+        /* Animations */
+        @keyframes slideUp { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        .loading-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.8); z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h4 class="fw-bold mb-0">ACE MONTESSORI</h4>
+            <p class="small opacity-50 mb-0">Admin Management Suite</p>
+        </div>
+        
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" onclick="showSection('overviewSection', this)">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" onclick="showSection('admissionsSection', this)">
+                    <i class="bi bi-mortarboard"></i> Admissions
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" onclick="showSection('messagesSection', this)">
+                    <i class="bi bi-chat-dots"></i> Inquiries
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" onclick="showSection('gallerySection', this)">
+                    <i class="bi bi-images"></i> Media Manager
+                </a>
+            </li>
+        </ul>
+
+        <div style="position: absolute; bottom: 30px; width: 100%;" class="px-3">
+            <button onclick="logout()" class="btn btn-outline-light w-100 border-0 rounded-3 text-start ps-3">
+                <i class="bi bi-box-arrow-left me-2"></i> Sign Out
+            </button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        
+        <div id="overviewSection" class="section-container active">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <div>
+                    <h2 class="fw-bold mb-1">Welcome back, Admin!</h2>
+                    <p class="text-muted">Here is what's happening today at ACE.</p>
+                </div>
+                <div class="text-end">
+                    <span id="currentDate" class="fw-bold text-tekhelet"></span>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="glass-card d-flex align-items-center">
+                        <div class="stat-icon bg-primary bg-opacity-10 text-primary me-4">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div>
+                            <p class="text-muted small mb-0">Applications</p>
+                            <h3 id="admissionCount" class="fw-bold mb-0">0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card d-flex align-items-center">
+                        <div class="stat-icon bg-warning bg-opacity-10 text-warning me-4">
+                            <i class="bi bi-envelope"></i>
+                        </div>
+                        <div>
+                            <p class="text-muted small mb-0">Messages</p>
+                            <h3 id="messageCount" class="fw-bold mb-0">0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card d-flex align-items-center">
+                        <div class="stat-icon bg-info bg-opacity-10 text-info me-4">
+                            <i class="bi bi-image"></i>
+                        </div>
+                        <div>
+                            <p class="text-muted small mb-0">Gallery Items</p>
+                            <h3 id="photoCount" class="fw-bold mb-0">0</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="admissionsSection" class="section-container">
+            <div class="glass-card">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="fw-bold mb-0">Admission Applications</h4>
+                    <div class="d-flex gap-2">
+                        <input type="text" id="admSearch" class="form-control form-control-sm" placeholder="Search students..." onkeyup="filterTable('admissionTable', this.value)">
+                        <button onclick="refreshAll()" class="btn btn-sm btn-tekhelet">Refresh</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-middle" id="admissionTable">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Parent / Contact</th>
+                                <th>Grade Level</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admissionTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="messagesSection" class="section-container">
+            <h4 class="fw-bold mb-4">Website Inquiries</h4>
+            <div id="messageContainer" class="row g-4"></div>
+        </div>
+
+        <div id="gallerySection" class="section-container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="glass-card">
+                        <h5 class="fw-bold mb-4">Upload New Media</h5>
+                        <form id="uploadForm">
+                            <div class="mb-3">
+                                <label class="small fw-bold">Image File</label>
+                                <input type="file" id="imageFile" class="form-control shadow-none" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="small fw-bold">Caption</label>
+                                <input type="text" id="imageCaption" class="form-control shadow-none" placeholder="e.g. Science Lab 2026" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="small fw-bold">Category</label>
+                                <select id="imageCategory" class="form-select shadow-none">
+                                    <option>Classroom</option>
+                                    <option>Events</option>
+                                    <option>Campus</option>
+                                    <option>Sports</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-tekhelet w-100 py-2">Publish to Gallery</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row g-3" id="galleryPreview"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const API_BASE = "http://localhost:8080/api";
+
+        // Security Check
+        function checkAuth() {
+            const token = localStorage.getItem('aceToken');
+            if (!token) window.location.href = 'login.html';
+        }
+
+        // Section Navigation
+        function showSection(id, el) {
+            document.querySelectorAll('.section-container').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            el.classList.add('active');
+        }
+
+        // --- Fetch Admissions ---
+        async function fetchAdmissions() {
+            try {
+                const res = await fetch(`${API_BASE}/admissions/all`);
+                const data = await res.json();
+                document.getElementById('admissionCount').innerText = data.length;
+                let html = '';
+                data.reverse().forEach(item => {
+                    html += `
+                        <tr>
+                            <td><span class="fw-600">${item.studentName}</span></td>
+                            <td><div class="small fw-bold">${item.parentName}</div><div class="text-muted small">${item.phone}</div></td>
+                            <td><span class="badge-grade">${item.gradeApplyingFor}</span></td>
+                            <td><span class="badge bg-success bg-opacity-10 text-success">New</span></td>
+                            <td>
+                                <button onclick="deleteItem('admissions', '${item._id}')" class="btn btn-sm btn-outline-danger border-0">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>`;
+                });
+                document.getElementById('admissionTableBody').innerHTML = html || '<tr><td colspan="5" class="text-center py-4">No applications found</td></tr>';
+            } catch (e) { console.error("Error fetching admissions", e); }
+        }
+
+        // --- Fetch Messages ---
+        async function fetchMessages() {
+            try {
+                const res = await fetch(`${API_BASE}/contact/all`);
+                const data = await res.json();
+                document.getElementById('messageCount').innerText = data.length;
+                let html = '';
+                data.reverse().forEach(m => {
+                    html += `
+                        <div class="col-md-6">
+                            <div class="glass-card h-100">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h6 class="fw-bold mb-0">${m.name}</h6>
+                                    <small class="text-muted">${m.subject || 'Inquiry'}</small>
+                                </div>
+                                <p class="small text-muted mb-3">${m.message}</p>
+                                <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                                    <a href="mailto:${m.email}" class="small text-decoration-none text-tekhelet fw-bold">Reply via Email</a>
+                                    <button onclick="deleteItem('contact', '${m._id}')" class="btn btn-sm text-danger border-0">Delete</button>
+                                </div>
+                            </div>
+                        </div>`;
+                });
+                document.getElementById('messageContainer').innerHTML = html || '<p class="text-center">No messages yet.</p>';
+            } catch (e) { console.error(e); }
+        }
+
+        // --- Gallery Logic ---
+        async function fetchGallery() {
+            try {
+                const res = await fetch(`${API_BASE}/gallery/all`);
+                const data = await res.json();
+                document.getElementById('photoCount').innerText = data.length;
+                let html = '';
+                data.forEach(img => {
+                    html += `
+                        <div class="col-md-4">
+                            <div class="card border-0 rounded-4 overflow-hidden shadow-sm">
+                                <img src="http://localhost:8080/uploads${img.imageUrl}" style="height:150px; object-fit:cover;">
+                                <div class="p-2 d-flex justify-content-between align-items-center bg-white">
+                                    <small class="fw-bold">${img.category}</small>
+                                    <button onclick="deleteItem('gallery', '${img._id}')" class="btn btn-sm text-danger"><i class="bi bi-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>`;
+                });
+                document.getElementById('galleryPreview').innerHTML = html;
+            } catch (e) { console.error(e); }
+        }
+
+        // Generic Delete
+        async function deleteItem(endpoint, id) {
+            if(!confirm("Are you sure you want to remove this record?")) return;
+            try {
+                await fetch(`${API_BASE}/${endpoint}/${id}`, { method: 'DELETE' });
+                refreshAll();
+            } catch (e) { alert("Error deleting item"); }
+        }
+
+        // Global Refresh
+        function refreshAll() {
+            fetchAdmissions();
+            fetchMessages();
+            fetchGallery();
+        }
+
+        function filterTable(tableId, query) {
+            const rows = document.querySelectorAll(`#${tableId} tbody tr`);
+            rows.forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(query.toLowerCase()) ? '' : 'none';
+            });
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = 'login.html';
+        }
+
+        // Initialize
+        document.getElementById('currentDate').innerText = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        checkAuth();
+        refreshAll();
+    </script>
+</body>
+</html>x
